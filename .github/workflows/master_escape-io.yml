@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -28,7 +28,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-      
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -51,13 +51,13 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C55E4B53E4B34D74A0E5BF380A1B6FCA }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3170A8110ED34A37A5DAAF2BC0B0A6AA }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5F7C7F9F4C174BAD96B1D24C960D9548 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_91BD56662FE34E9EADBEFA7E87C969D2 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_259FDC8B8E5946438BDA7DB41917CAF2 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5DBF37F6C22B4B1995E421D1577965C4 }}
 
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'escape-io'
           slot-name: 'Production'
